@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Dentist Registration Form
+{% endblock title %}
+
+{% block css_file-name %}dentist_registration.css{% endblock css_file-name %}
+
+{% block content %}
+<section class="container-ss">
+    <header>Dentist Registration Form</header>
+    <form action="#" class="form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="hero">
+            <div class="card-pic">
+                <img src="{% static 'images/maleIcon.png' %}" alt="" id="profile-pic">
+                <label for="input-file" id="input-file-label" class="custom-label">Update image</label>
+                {{ form.profile_image }}
+                {{ form.profile_image.errors}}
+            </div>
+        </div>
+        <div class="input-box">
+            {{form.fullName.label_tag}}
+            {{form.fullName}}
+            {{form.fullName.errors}}
+        </div>
+
+        <div class="input-box">
+            {{form.email.label_tag}}
+            {{form.email}}
+            {{form.email.errors}}
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+                {{form.phone_number.label_tag}}
+                {{form.phone_number}}
+                {{form.phone_number.errors}}
+            </div>
+
+            <div class="input-box">
+                {{form.date_of_birth.label_tag}}
+                {{form.date_of_birth}}
+                {{form.date_of_birth.errors}}
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="input-box">
+                {{form.specialization.label_tag}}
+                {{form.specialization}}
+                {{form.specialization.choices}}
+                {{form.specialization.errors}}
+            </div>
+        
+            <div class="input-box">
+                {{form.fee.label_tag}}
+                {{form.fee}}
+                {{form.fee.choices}}
+                {{form.fee.errors}}
+            </div>
+        
+            <div class="input-box">
+                {{form.experience.label_tag}}
+                {{form.experience}}
+                {{form.experience.choices}}
+                {{form.experience.errors}}
+            </div>
+        </div>
+        
+        <div class="gender-box">
+            {{form.gender.label_tag}}
+            <div class="gender-option">
+                {% for choice in form.gender %}
+
+                <div class="gender">
+                    {{choice.tag}}
+                    {{choice.choice_label}}
+                    {{choice.errors}}
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="address-box" style="margin-bottom: 2rem;">
+            <div class="input-box">
+                {{form.address_1.label_tag}}
+                {{form.address_1}}
+                {{form.address_1.errors}}
+
+                {{form.address_2.label_tag}}
+                {{form.address_2}}
+                {{form.address_2.errors}}
+            </div>
+        </div>
+
+        <!-- <div class="password-section">
+            <div class="input-box">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+        </div> -->
+        
+
+        <button type="submit">Register</button>
+    </form>
+</section>
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+    let profilepic = document.getElementById('profile-pic');
+    let inputFile = document.getElementById('input-file');
+    inputFile.onchange=function(){
+        profilepic.src=URL.createObjectURL(inputFile.files[0])
+    }
+</script> 
+    
+{% endblock extra_js %}
+
